@@ -59,12 +59,14 @@ android {
 dependencies {
     ksp(libs.dagger.hilt.compiler)
     ksp(libs.hilt.compiler)
+    ksp(libs.androidx.appfunctions.compiler)
 
     implementation(platform(libs.compose.bom))
     implementation(platform(libs.firebase.bom))
 
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.appfunctions)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.mediarouter)
     implementation(libs.automattic.crashlogging)

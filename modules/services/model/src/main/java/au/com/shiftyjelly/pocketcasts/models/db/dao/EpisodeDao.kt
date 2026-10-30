@@ -60,6 +60,30 @@ abstract class EpisodeDao {
     abstract suspend fun findFirstBySearchQuery(query: String): PodcastEpisode?
 
     @Transaction
+    @Query(
+        """
+        SELECT podcast_episodes.*
+        FROM podcast_episodes
+        JOIN podcasts ON podcast_episodes.podcast_id = podcasts.uuid
+        WHERE podcasts.subscribed = 1
+          AND (
+            :query = ''
+            OR podcast_episodes.title LIKE '%' || :query || '%' ESCAPE '\'
+            OR podcast_episodes.cleanTitle LIKE '%' || :query || '%' ESCAPE '\'
+            OR podcasts.clean_title LIKE '%' || :query || '%' ESCAPE '\'
+          )
+          AND (
+            :podcastTitle = ''
+            OR podcasts.title LIKE '%' || :podcastTitle || '%' ESCAPE '\'
+            OR podcasts.clean_title LIKE '%' || :podcastTitle || '%' ESCAPE '\'
+          )
+        ORDER BY podcast_episodes.published_date DESC
+        LIMIT :limit
+    """,
+    )
+    abstract suspend fun searchSubscribedEpisodes(query: String, podcastTitle: String, limit: Int): List<PodcastEpisode>
+
+    @Transaction
     @Query("SELECT * FROM podcast_episodes WHERE last_playback_interaction_sync_status <> 1 AND last_playback_interaction_date IS NOT NULL ORDER BY last_playback_interaction_date DESC LIMIT 1000")
     abstract fun findEpisodesForHistorySyncBlocking(): List<PodcastEpisode>
 

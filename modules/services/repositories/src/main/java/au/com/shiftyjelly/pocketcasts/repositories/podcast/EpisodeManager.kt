@@ -28,6 +28,11 @@ interface EpisodeManager {
     fun findEpisodeByUuidFlow(uuid: String): Flow<BaseEpisode>
     suspend fun findFirstBySearchQuery(query: String): PodcastEpisode?
 
+    /**
+     * Searches episodes of subscribed podcasts, newest first. A blank [query] or [podcastTitle] doesn't filter.
+     */
+    suspend fun searchSubscribedEpisodes(query: String, podcastTitle: String, limit: Int): List<PodcastEpisode>
+
     fun findEpisodesWhereBlocking(queryAfterWhere: String, forSubscribedPodcastsOnly: Boolean = true): List<PodcastEpisode>
     fun findEpisodesByPodcastOrderedBlocking(podcast: Podcast): List<PodcastEpisode>
     suspend fun findEpisodesByPodcastOrdered(podcast: Podcast): List<PodcastEpisode>

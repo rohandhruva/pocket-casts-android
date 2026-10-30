@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppFunctionAppMetadata xmlns:appfn="http://schemas.android.com/apk/androidx.appfunctions"
+    appfn:instructions="Pocket Casts is a podcast player. Its functions search episodes of the podcasts the user follows, play an episode, add an episode to the Up Next queue, bookmark the current playback position, and set a sleep timer.
+
+Operational patterns:
+- Call 'searchEpisodes' to get the episodeUuid for 'playEpisode' and 'addToUpNext'. For requests such as 'the latest episode of a podcast', pass only podcastTitle and use the first result.
+- Use 'addToUpNext' when the user wants to keep listening to the current episode, and 'playEpisode' when they want to listen now.
+- 'addBookmark' and 'setSleepTimer' act on the current playback and take no episodeUuid.
+
+Constraints:
+- Search covers only podcasts the user follows, not the full podcast catalog.
+- Bookmarks require a Pocket Casts Plus or Patron subscription."
+    appfn:displayDescription="@string/app_functions_display_description" />
