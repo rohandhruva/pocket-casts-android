@@ -40,6 +40,7 @@
     <string name="auto_archive">Auto archive</string>
     <string name="auto_download">Auto download</string>
     <string name="bookmark">Bookmark</string>
+    <string name="app_functions_display_description">Find and play episodes, queue them in Up Next, add bookmarks, and set a sleep timer</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_download">Cancel download</string>

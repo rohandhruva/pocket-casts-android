@@ -110,6 +110,14 @@ class EpisodeManagerImpl @Inject constructor(
 
     override suspend fun findFirstBySearchQuery(query: String): PodcastEpisode? = episodeDao.findFirstBySearchQuery(query)
 
+    override suspend fun searchSubscribedEpisodes(query: String, podcastTitle: String, limit: Int): List<PodcastEpisode> {
+        return episodeDao.searchSubscribedEpisodes(
+            query = query.trim().escapeLike('\\'),
+            podcastTitle = podcastTitle.trim().escapeLike('\\'),
+            limit = limit,
+        )
+    }
+
     /**
      * Find a podcast episodes
      */
